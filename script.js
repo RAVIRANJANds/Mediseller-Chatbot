@@ -1,4 +1,9 @@
-const API_URL = "https://YOUR-RENDER-URL.onrender.com";
+// ===============================
+// API URL
+// ===============================
+
+const API_URL = "https://mediseller-chatbot.onrender.com";
+
 // ===============================
 // STATE TRACKER
 // ===============================
@@ -14,7 +19,7 @@ async function saveToBackend(data) {
 
     try {
 
-        await fetch("http://127.0.0.1:5000/save-data", {
+        await fetch(`${API_URL}/save-data`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -130,7 +135,7 @@ async function sendMessage() {
             try {
 
                 const response = await fetch(
-                    "http://127.0.0.1:5000/track-order",
+                     `${API_URL}/track-order`,
                     {
                         method: "POST",
                         headers: {
@@ -188,7 +193,7 @@ Total Amount: ₹${data.total_amount}`,
             try {
 
                 await fetch(
-                    "http://127.0.0.1:5000/create-ticket",
+                    `${API_URL}/create-ticket`,
                     {
                         method: "POST",
                         headers: {
@@ -223,7 +228,7 @@ Total Amount: ₹${data.total_amount}`,
             try {
 
                 await fetch(
-                    "http://127.0.0.1:5000/create-reorder",
+                    `${API_URL}/create-reorder`,
                     {
                         method: "POST",
                         headers: {

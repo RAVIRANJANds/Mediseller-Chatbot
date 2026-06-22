@@ -16,7 +16,14 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 SHEET_ID = "1UyvjshQcX7GR_IWao82dGTZ0IaGfktQMoFB0XmVIPIE"
 
-CREDS_FILE = "/etc/secrets/credentials.json"
+if os.path.exists("/etc/secrets/credentials.json"):
+    CREDS_FILE = "/etc/secrets/credentials.json"   # Render
+else:
+    CREDS_FILE = os.path.join(
+        BASE_DIR,
+        "Data",
+        "credentials.json"
+    )   # Local
 
 SCOPES = [
     "https://www.googleapis.com/auth/spreadsheets",
