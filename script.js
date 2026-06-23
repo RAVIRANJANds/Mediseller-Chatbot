@@ -276,7 +276,8 @@ Total Amount: ₹${data.total_amount}`,
 
 function selectOption(option) {
 
-    if (conversationState === "awaiting_mobile") {
+    if (conversationState === "awaiting_mobile" && option !== "FAQs")
+         {
 
         updateChatUI(
             "Please enter your mobile number first.",
