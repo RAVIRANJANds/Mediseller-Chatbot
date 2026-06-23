@@ -284,8 +284,10 @@ def chat_ai():
 
     except Exception as e:
 
+        print("Gemini Error:", e)
+
         return jsonify({
-            "reply": str(e)
+            "reply": "Sorry, AI Assistant is temporarily unavailable. Please try again later."
         }), 500
 # ==================================
 # HEALTH CHECK
