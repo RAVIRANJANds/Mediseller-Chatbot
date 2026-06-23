@@ -374,7 +374,7 @@ function selectOption(option) {
             case "Product Reorder":
 
                 updateChatUI(
-                    "Please enter Order No or Product Name:",
+                    "Please enter correct Order No or Product Name:",
                     "bot"
                 );
 
