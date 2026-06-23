@@ -180,7 +180,43 @@ def create_ticket():
             "error": str(e)
         })
 
+@app.route("/verify-order", methods=["POST"])
+def verify_order():
 
+    try:
+
+        data = request.json
+
+        order_no = str(
+            data.get("order_no", "")
+        ).strip().upper()
+
+        sheet = get_sheet("Master sheet")
+
+        records = sheet.get_all_records()
+
+        for row in records:
+
+            current_order = str(
+                row.get("Order No", "")
+            ).strip().upper()
+
+            if current_order == order_no:
+
+                return jsonify({
+                    "found": True
+                })
+
+        return jsonify({
+            "found": False
+        })
+
+    except Exception as e:
+
+        return jsonify({
+            "found": False,
+            "error": str(e)
+        })
 # ==================================
 # CREATE REORDER
 # ==================================
@@ -219,7 +255,6 @@ def create_reorder():
 
 @app.route("/faq", methods=["GET"])
 def get_faq():
-
     try:
 
         sheet = get_sheet("FAQ")

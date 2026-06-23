@@ -227,35 +227,61 @@ Total Amount: ₹${data.total_amount}`,
 
             try {
 
-                await fetch(
-                    `${API_URL}/create-reorder`,
-                    {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            order_no: text
-                        })
-                    }
-                );
-
-                updateChatUI(
-                    "✅ Re-order request submitted.",
-                    "bot"
-                );
-
-            } catch (e) {
-
-                updateChatUI(
-                    "❌ Unable to submit reorder request.",
-                    "bot"
-                );
-
+                const verifyResponse = await fetch(
+                `${API_URL}/verify-order`,
+                {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    order_no: text
+                })
             }
+        );
+
+            const verifyData = await verifyResponse.json();
+
+            if (!verifyData || !verifyData.found) {
+
+                updateChatUI(
+                    "❌ Invalid Order ID. Reorder can only be placed for existing orders.",
+                    "bot"
+                );
 
             conversationState = "idle";
             break;
+        }
+
+        await fetch(
+            `${API_URL}/create-reorder`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    order_no: text
+                })
+            }
+        );
+
+        updateChatUI(
+            "✅ Re-order request submitted successfully.",
+            "bot"
+        );
+
+    } catch (e) {
+
+        updateChatUI(
+            "❌ Unable to submit reorder request.",
+            "bot"
+        );
+
+    }
+
+    conversationState = "idle";
+        break;
 
 default:
 
