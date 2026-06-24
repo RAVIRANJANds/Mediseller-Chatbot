@@ -183,9 +183,9 @@ body{
 }
 
 /* Bot Messages */
-.bot-message{
-    background: rgb(238, 9, 9);
-    color: white !important;
+.bot-message {
+    background: yellow !important;
+    color: black !important;
 }
 
 /* User Messages */
